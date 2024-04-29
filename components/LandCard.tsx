@@ -8,6 +8,7 @@ import ImageCarousel from "./ImageCarousel";
 import { MotionDiv } from "./MotionDiv";
 import { Land } from "@/types";
 import Image from "next/image";
+import { getPrice } from "@/lib/utils";
 
 export type LandProps = {
   land: Land;
@@ -21,6 +22,23 @@ const variants = {
 
 function LandCard(props: LandProps) {
   const { land, index } = props;
+
+  const totalPrice = getPrice({
+    atleast1acre: land.total_land_size_in_acres.acres !== 0,
+    inCr: land.price_per_acre_crore.crore,
+    inLakh: land.price_per_acre_crore.lakh,
+    totalPrice: land.total_price,
+  });
+
+  const landSize =
+    (land.total_land_size_in_acres.acres !== 0
+      ? `${land.total_land_size_in_acres.acres} acres`
+      : "") +
+    " " +
+    (land.total_land_size_in_acres.guntas
+      ? `${land.total_land_size_in_acres.guntas} guntas`
+      : "");
+
   return (
     <MotionDiv
       variants={variants}
@@ -55,12 +73,9 @@ function LandCard(props: LandProps) {
             <p>{land.district_name} (dt)</p>
           </CardTitle>
           <CardDescription className="flex items-center gap-1">
-            <span className="text-black font-bold">
-              {land.total_land_size_in_acres.acres} acres{" "}
-              {land.total_land_size_in_acres.guntas} guntas
-            </span>
+            <span className="text-black font-bold">{landSize}</span>
             <span>•</span>
-            <span>₹ 60 laksh per acre</span>
+            <span> ₹ {totalPrice}</span>
           </CardDescription>
         </CardHeader>
       </Card>
