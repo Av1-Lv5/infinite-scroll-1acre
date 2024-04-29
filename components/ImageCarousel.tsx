@@ -29,6 +29,7 @@ function ImageCarousel(props: CarouselProps) {
           return (
             <CarouselItem key={imageData.id} className="pl-2">
               <Image
+                unoptimized
                 alt="An image of agricultural land"
                 width={500}
                 className="object-cover h-[250px] w-full rounded-t-lg"
