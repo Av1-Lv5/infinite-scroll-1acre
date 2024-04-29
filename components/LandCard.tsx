@@ -32,7 +32,7 @@ function LandCard(props: LandProps) {
 
   const landSize =
     (land.total_land_size_in_acres.acres !== 0
-      ? `${land.total_land_size_in_acres.acres} acres`
+      ? `${land.total_land_size_in_acres.acres} acre`
       : "") +
     " " +
     (land.total_land_size_in_acres.guntas

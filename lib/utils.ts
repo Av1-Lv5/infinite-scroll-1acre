@@ -19,7 +19,7 @@ export function getPrice({
   if (atleast1acre) {
     return `${inCr ? inCr.toString() + (inLakh ? "." : "") : ""}${
       inLakh ? inLakh.toString() : ""
-    } ${inCr ? "crores" : "lakh"} per acre`;
+    } ${inCr ? "crore" : "lakh"} per acre`;
   } else {
     return `${formatPrice(totalPrice)} for full property`;
   }
