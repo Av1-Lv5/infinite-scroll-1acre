@@ -66,6 +66,7 @@ function Collection() {
             <section className="flex mt-6 justify-center items-center w-full">
               <div ref={ref}>
                 <Image
+                  unoptimized
                   src="/assets/spinner.svg"
                   alt="spinner"
                   width={56}
