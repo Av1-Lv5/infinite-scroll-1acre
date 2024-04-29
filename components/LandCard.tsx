@@ -44,6 +44,7 @@ function LandCard(props: LandProps) {
                 {land.village_name}, {land.mandal_name}
               </p>
               <Image
+                unoptimized
                 width={26}
                 height={26}
                 className="w-auto"
