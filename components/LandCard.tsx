@@ -1,24 +1,69 @@
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import ImageCarousel from "./ImageCarousel";
+import { MotionDiv } from "./MotionDiv";
+import { Land } from "@/types";
+import Image from "next/image";
 
-function LandCard() {
+export type LandProps = {
+  land: Land;
+  index: number;
+};
+
+const variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+function LandCard(props: LandProps) {
+  const { land, index } = props;
   return (
-    <Card>
-      <div>
-        <ImageCarousel />
-      </div>
-      <CardHeader>
-        <CardTitle className="text-lg">Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
-      </CardHeader>
-    </Card>
+    <MotionDiv
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      transition={{
+        delay: index * 0.25,
+        ease: "easeInOut",
+        duration: 0.5,
+      }}
+      viewport={{ amount: 0 }}
+    >
+      <Card className="shadow-md hover:shadow-xl">
+        <div>
+          <ImageCarousel media={land.land_media} />
+        </div>
+        <CardHeader>
+          <CardTitle className="text-base">
+            <div className="flex gap-4 items-center">
+              <p>
+                {land.village_name}, {land.mandal_name}
+              </p>
+              <Image
+                width={26}
+                height={26}
+                className="w-auto"
+                src="/assets/verified-active.svg"
+                alt="verified icon"
+              />
+            </div>
+            <p>{land.district_name} (dt)</p>
+          </CardTitle>
+          <CardDescription className="flex items-center gap-1">
+            <span className="text-black font-bold">
+              {land.total_land_size_in_acres.acres} acres{" "}
+              {land.total_land_size_in_acres.guntas} guntas
+            </span>
+            <span>•</span>
+            <span>₹ 60 laksh per acre</span>
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </MotionDiv>
   );
 }
 
